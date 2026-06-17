@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DEGROCRAFT Wiki
 
-## Getting Started
+База знаний приватного Minecraft-сервера DEGROCRAFT. Сайт-документация на [Nextra](https://nextra.site/) с инструкциями для новичков, правилами, описанием игрового контента и списком модов/плагинов сервера.
 
-First, run the development server:
+🔗 Прод: [wiki.degrocraft.ru](https://wiki.degrocraft.ru)
+🏠 Основной сайт: [degrocraft.ru](https://degrocraft.ru)
+
+## О проекте
+
+Wiki — справочный раздел экосистемы DEGROCRAFT. Если основной сайт ([Degrocraft](https://github.com/only1stumpy/Degrocraft)) — это лендинг с приглашением на сервер, то вики решает задачу онбординга и поддержки уже принятых игроков: как зарегистрироваться, какие команды доступны, что разрешено и что запрещено, как устроен мир сервера.
+
+## Разделы
+
+| Раздел | Содержание |
+|---|---|
+| **Главная** | Общее описание вики |
+| **Основные положения** | Правила сервера, список запрещённых модификаций |
+| **Для новичков** | Как начать играть (вступление через Telegram, оплата проходки, whitelist), список команд, регистрация и авторизация (AuthMe) |
+| **Игровой контент** | Серверные механики и плагины: упоминания игроков (DeluxeMentions), отключённые фантомы, невидимые рамки для предметов, GSit (сидеть/лежать), кастомные скины, blocklight и др. |
+| **Моды и дополнения** | Голосовой чат (Plasmo Voice), эмоции (Emotecraft), серверный ресурспак |
+
+Дополнительно описаны границы игрового мира (радиусы Верхнего мира, Нижнего мира и Энда) и нюансы переходов через порталы Нижнего мира у края карты.
+
+## Стек технологий
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [Nextra 4](https://nextra.site/) + `nextra-theme-docs` — движок документации
+- MDX — контент страниц (`page.mdx`) с поддержкой React-компонентов (`Callout` и др.)
+- [React 19](https://react.dev/) / [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Pagefind](https://pagefind.app/) — статический полнотекстовый поиск по сайту (генерируется в `postbuild`)
+- Деплой: [Vercel](https://vercel.com/)
+
+## Структура проекта
+
+```
+app/
+  layout.tsx              # тема Nextra, навбар, футер, метаданные
+  page.mdx                 # главная страница вики
+  _meta.js                  # порядок и названия разделов в навигации
+  osn/                        # «Основные положения»
+    rules/page.mdx              # правила сервера
+    banmods/page.mdx             # запрещённые/разрешённые моды
+  start/                       # «Для новичков»
+    howtoplay/page.mdx           # вход через Telegram, оплата, whitelist
+    commands/page.mdx             # список команд
+    auth/page.mdx                  # регистрация и вход (AuthMe)
+  gamecontent/                 # «Игровой контент»: механики и плагины сервера
+  mods/                        # «Моды и дополнения»: голосовой чат, эмоции, ресурспак
+```
+
+Навигация и заголовки разделов в боковом меню задаются файлами `_meta.js` в каждой папке.
+
+## Запуск проекта
+
+### 1. Установка зависимостей
+
+```bash
+npm install
+```
+
+### 2. Запуск дев-сервера
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Сборка
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+При сборке (`postbuild`) автоматически индексируется контент для локального поиска через Pagefind.
 
-To learn more about Next.js, take a look at the following resources:
+## Деплой
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Проект готов к деплою на [Vercel](https://vercel.com/new) — дополнительных переменных окружения не требуется.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*DEGROCRAFT не аффилирован с Mojang Studios.*
